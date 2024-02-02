@@ -1,1 +1,3 @@
-# ti8m-spring-security-course
+# TI&M Spring security and monitoring courser
+
+[//]: # (todo rename repository)
