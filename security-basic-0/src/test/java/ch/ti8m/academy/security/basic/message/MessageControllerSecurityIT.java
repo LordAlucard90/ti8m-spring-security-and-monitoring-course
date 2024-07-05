@@ -54,4 +54,29 @@ class MessageControllerSecurityIT {
         }
 
     }
+
+    @Nested
+    class AuthenticatedEndpointTests {
+        @Test
+        void givenNoUser_thenIsUnauthorized() throws Exception {
+            mockMvc
+                    .perform(
+                            get("/messages/default/authenticated")
+                    )
+                    .andExpect(status().isUnauthorized());
+        }
+
+        @Test
+        void givenAdmin_thenIsOk() throws Exception {
+            mockMvc
+                    .perform(
+                            get("/messages/default/authenticated")
+                                    .with(AUTHORIZED_USER)
+
+                    )
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.message").value("available to authenticated"));
+        }
+
+    }
 }

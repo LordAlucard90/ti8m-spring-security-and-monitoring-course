@@ -1,3 +1,2 @@
-# TI&M Spring security and monitoring courser
+# TI&M Spring security and monitoring course
 
-[//]: # (todo rename repository)
