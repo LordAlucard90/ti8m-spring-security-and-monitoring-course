@@ -16,6 +16,7 @@
 
     <modules>
         <module>security-basic-0</module>
+        <module>security-basic-0-solution</module>
     </modules>
 
     <properties>
