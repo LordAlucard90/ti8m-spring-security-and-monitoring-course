@@ -1,0 +1,23 @@
+server:
+  port: 8002
+  servlet:
+    context-path: /security-basic
+
+spring:
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    url: jdbc:h2:mem:security-basic;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+
+  flyway:
+    enabled: false
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG

@@ -10,16 +10,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] whiteList = new String[]{
+    // TODO: define the string roles:
+    //  - STAFF
+    //  - ADMIN
+    private static final String[] WHITE_LIST = new String[]{
             "/messages/default/open",
     };
+    // TODO: define the endpoints that belong to each role
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // open white list endpoints
-                        .requestMatchers(whiteList).permitAll()
+                        .requestMatchers(WHITE_LIST).permitAll()
+                        // TODO: configure the security o require the specified role(s)
                         // require all others authenticated
                         .anyRequest().authenticated()
                 );
@@ -29,4 +34,21 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    // TODO: generate the password encoder
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        // ...
+//    }
+
+    // TODO: create alice and bob and use them to populate the UserDerailsManager
+    // HINT: the password encoder is needed to encrypt the password
+//    @Bean
+//    public InMemoryUserDetailsManager inMemoryUsers(PasswordEncoder encoder) {
+//        var alice = User.withUsername("...")
+//                // ...
+//                .build();
+//        var bob = // ...
+//        return new InMemoryUserDetailsManager(/*,,,*/);
+//    }
 }
