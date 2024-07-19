@@ -1,0 +1,45 @@
+server:
+  port: 8003
+  servlet:
+    context-path: /security-basic
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+#  jpa:
+#    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    username: sa
+#    password: password
+#    driverClassName: org.h2.Driver
+  datasource:
+    url: jdbc:h2:mem:security-basic;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+
+  h2:
+    console:
+      path: /h2
+      settings.trace: false
+      settings.web-allow-others: true
+      enabled: true # http://localhost:8003/security-basic/h2/
+
+  flyway:
+    enabled: true
+
+flyway:
+  user: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+  url: ${spring.datasource.url}
+  schemas: PUBLIC
+  location: classpath:db/migration
+  validate-on-migrate: true
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
