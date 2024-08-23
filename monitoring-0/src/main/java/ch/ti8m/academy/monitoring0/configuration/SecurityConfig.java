@@ -1,4 +1,4 @@
-package ch.ti8m.academy.monitoring.solution.configuration;
+package ch.ti8m.academy.monitoring0.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

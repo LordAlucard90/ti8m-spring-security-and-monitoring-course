@@ -1,4 +1,4 @@
-package ch.ti8m.academy.monitoring.solution;
+package ch.ti8m.academy.monitoring0.solution;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;

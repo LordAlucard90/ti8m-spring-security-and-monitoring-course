@@ -1,0 +1,43 @@
+server:
+  port: 8300
+  servlet:
+    context-path: /monitoring
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    url: jdbc:h2:mem:security-basic;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+
+  flyway:
+    enabled: false
+
+  security:
+    user:
+      name: student
+      password: secret
+
+flyway:
+  user: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+  url: ${spring.datasource.url}
+  schemas: PUBLIC
+  location: classpath:db/migration
+  validate-on-migrate: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health      # http://localhost:8300/monitoring/actuator/health
+          - info        # http://localhost:8300/monitoring/actuator/info
+          - metrics     # http://localhost:8300/monitoring/actuator/metrics
+          - prometheus  # http://localhost:8300/monitoring/actuator/prometheus
+          - env         # http://localhost:8300/monitoring/actuator/env
+          - beans       # http://localhost:8300/monitoring/actuator/beans
+          - mappings    # http://localhost:8300/monitoring/actuator/mappings
