@@ -29,7 +29,7 @@ spring:
 
 ## Exercise 2
 
-Call the custom (secured) endpoint with multiple names
+Call the custom endpoint with multiple names
 - http://localhost:8300/monitoring/messages/greet?name=alice
 - http://localhost:8300/monitoring/messages/greet?name=bob
 - http://localhost:8300/monitoring/messages/greet?name=charly
@@ -58,12 +58,16 @@ Enable Spring Admin and visit the Admin main pages
 
 From the wallboard navigate to the application and inspect details and metrics.
 In the metrics page add the following metric:
-- metric: `http:server.requests`
+- metric: `http.server.requests`
 - uri: `/messages/greet`
 
 Now play with the `greet` endpoint and watch the values change in real time.
 
-Note: you may need to configure your local domain to redirect to 127.0.0.1 to make it work.
+Note: on windows you may need to configure your local domain to redirect to 127.0.0.1 to make it work:
+- run as administrator `notepad`
+- open `c:\Windows\System32\Drivers\etc\hosts`
+- add `127.0.0.1 <local_domain>`
+- save
 
 ## Solution
 
