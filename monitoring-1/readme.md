@@ -1,4 +1,4 @@
-# Monitoring - 1 - Solution
+# Monitoring - 1
 
 ## Exercise
 
