@@ -1,4 +1,4 @@
-package ch.ti8m.academy.monitoring0.solution.configuration;
+package ch.ti8m.academy.monitoring1.solution.configuration;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,5 @@
 server:
-  port: 8300
+  port: 8301
   servlet:
     context-path: /monitoring
 
@@ -25,7 +25,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:8300/monitoring
+        url: http://localhost:8301/monitoring
         username: ${spring.security.user.name}
         password: ${spring.security.user.password}
         # configuration for client (data sent to the server to connect to client)
@@ -55,16 +55,10 @@ management:
     web:
       exposure:
         include:
-          - health      # http://localhost:8300/monitoring/actuator/health
-          - info        # http://localhost:8300/monitoring/actuator/info
-          - metrics     # http://localhost:8300/monitoring/actuator/metrics
-          - prometheus  # http://localhost:8300/monitoring/actuator/prometheus
-          - env         # http://localhost:8300/monitoring/actuator/env
-          - beans       # http://localhost:8300/monitoring/actuator/beans
-          - mappings    # http://localhost:8300/monitoring/actuator/mappings
-
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        security: DEBUG
+          - health      # http://localhost:8301/monitoring/actuator/health
+          - info        # http://localhost:8301/monitoring/actuator/info
+          - metrics     # http://localhost:8301/monitoring/actuator/metrics
+          - prometheus  # http://localhost:8301/monitoring/actuator/prometheus
+          - env         # http://localhost:8301/monitoring/actuator/env
+          - beans       # http://localhost:8301/monitoring/actuator/beans
+          - mappings    # http://localhost:8301/monitoring/actuator/mappings

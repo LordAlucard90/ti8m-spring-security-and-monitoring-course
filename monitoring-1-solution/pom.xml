@@ -10,6 +10,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>monitoring-solution</artifactId>
+    <artifactId>monitoring-1-solution</artifactId>
 
 </project>

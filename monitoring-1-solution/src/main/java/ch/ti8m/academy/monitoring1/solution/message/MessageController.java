@@ -1,4 +1,4 @@
-package ch.ti8m.academy.monitoring0.solution.message;
+package ch.ti8m.academy.monitoring1.solution.message;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

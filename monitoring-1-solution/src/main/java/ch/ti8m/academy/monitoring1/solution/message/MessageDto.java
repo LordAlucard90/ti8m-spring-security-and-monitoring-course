@@ -1,4 +1,4 @@
-package ch.ti8m.academy.monitoring0.solution.message;
+package ch.ti8m.academy.monitoring1.solution.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
