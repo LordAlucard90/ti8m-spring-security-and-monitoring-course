@@ -8,7 +8,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 
   datasource:
-    url: jdbc:h2:mem:security-basic;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:security-basic-2;DB_CLOSE_DELAY=-1
     username: sa
     password: password
     driverClassName: org.h2.Driver
