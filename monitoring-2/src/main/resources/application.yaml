@@ -1,0 +1,64 @@
+server:
+  port: 8302
+  servlet:
+    context-path: /monitoring
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  datasource:
+    url: jdbc:h2:mem:monitoring-2;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+
+  flyway:
+    enabled: false
+
+  security:
+    user:
+      name: student
+      password: secret
+
+  # configuration for client
+  boot:
+    admin:
+      client:
+        url: http://localhost:8302/monitoring
+        username: ${spring.security.user.name}
+        password: ${spring.security.user.password}
+        # configuration for client (data sent to the server to connect to client)
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+        # configuration for server
+        routes:
+          endpoints: ${management.endpoints.web.exposure.include}
+
+flyway:
+  user: ${spring.datasource.username}
+  password: ${spring.datasource.password}
+  url: ${spring.datasource.url}
+  schemas: PUBLIC
+  location: classpath:db/migration
+  validate-on-migrate: true
+
+management:
+  endpoint:
+    health:
+      # used by spring boot admin
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health      # http://localhost:8302/monitoring/actuator/health
+          - info        # http://localhost:8302/monitoring/actuator/info
+          - metrics     # http://localhost:8302/monitoring/actuator/metrics
+          - prometheus  # http://localhost:8302/monitoring/actuator/prometheus
+          - env         # http://localhost:8302/monitoring/actuator/env
+          - beans       # http://localhost:8302/monitoring/actuator/beans
+          - mappings    # http://localhost:8302/monitoring/actuator/mappings

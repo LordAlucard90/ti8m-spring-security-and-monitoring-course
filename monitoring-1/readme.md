@@ -10,7 +10,7 @@ Enable Spring Boot Admin and explore the Admin main pages
 From the wallboard navigate to the application and inspect details and metrics.
 In the metrics page add the following metric:
 - metric: `http.server.requests`
-- uri: `/messages/greet`
+- uri: `/messages/greet` (it will appear only after the first call on that endpoint)
 
 Now play with the `greet` endpoint and watch the values change live.
 - http://localhost:8301/monitoring/messages/greet?name=alice

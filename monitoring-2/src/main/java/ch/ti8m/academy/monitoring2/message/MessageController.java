@@ -1,6 +1,6 @@
-package ch.ti8m.academy.monitoring2.solution.message;
+package ch.ti8m.academy.monitoring2.message;
 
-import ch.ti8m.academy.monitoring2.solution.metric.MetricService;
+import ch.ti8m.academy.monitoring2.metric.MetricService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +17,10 @@ public class MessageController {
 
     @GetMapping("greet")
     public MessageDto open(@RequestParam(defaultValue = "nobody") String name) {
-        metricService.addRandomGreetDuration();
-        metricService.increaseGreetsCountFor(name);
-        metricService.notifyGreetFor(name);
+        // TODO: uncomment and use when ready
+        // metricService.addRandomGreetDuration();
+        // metricService.increaseGreetsCountFor(name);
+        // metricService.notifyGreetFor(name);
 
         var message = "Welcome %s!".formatted(name);
         return new MessageDto(message);

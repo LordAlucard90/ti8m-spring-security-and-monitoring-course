@@ -1,20 +1,13 @@
-package ch.ti8m.academy.monitoring2.solution.metric;
+package ch.ti8m.academy.monitoring2.metric;
 
 import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Metrics;
-import io.micrometer.core.instrument.Tag;
-import io.micrometer.core.instrument.Timer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 @Service
@@ -29,13 +22,15 @@ public class MetricService {
     ));
     // Counters used to measure how many time each person has been greeted
     private final Map<String, Counter> greetsCountersMap = new ConcurrentHashMap<>();
-    // Timer used to measure how much time has been spent greeting people
-    private final Timer greetsTimer = Metrics.timer(MetricName.GREETS_TIME.getMetricName());
-    // Downgrading Gauge used to measure how many known people remain to greet
-    private final AtomicLong greetsRemainingGauge = Metrics.gauge(
-            MetricName.GREETS_REMAINING.getMetricName(),
-            new AtomicLong(knownPeopleGreeted.size())
-    );
+    // TODO: create a timer using the Metrics class, with:
+    //  - name: MetricName.GREETS_TIME
+    //  - tag: no tag
+    // private final Timer greetsTimer = ...
+    // TODO: create a gauge using the Metrics class, with:
+    //  - name: MetricName.GREETS_REMAINING
+    //  - tag: no tag
+    //  - number: AtomicLong (initial value: number of knownPeople)
+    // private final AtomicLong greetsRemainingGauge = ...
 
     /*
      * Add a random duration of time spent for greeting a person
@@ -43,9 +38,8 @@ public class MetricService {
     public void addRandomGreetDuration() {
         // generate a random duration
         var seconds = random.nextInt(60) + 1;
-        var duration = Duration.of(seconds, ChronoUnit.SECONDS);
-        // register new duration in the timer
-        greetsTimer.record(duration);
+        // TODO: increment the timer of the given duration (seconds)
+        // greetsTimer....
         log.info("Increased greets duration of: {} s", seconds);
     }
 
@@ -55,20 +49,21 @@ public class MetricService {
     public void increaseGreetsCountFor(final String name) {
         // crete new counter for the specific name if necessary
         greetsCountersMap.computeIfAbsent(name, this::createGreetsCounterFor);
-        // increase the specific counter
-        greetsCountersMap.get(name).increment();
+        // TODO: increment the counter of one
+        // greetsCountersMap.get(name)....
         log.info("Increased greets count for: {}", name);
     }
 
     private Counter createGreetsCounterFor(final String name) {
         log.info("Created greets counter for: {}", name);
-        var tag = Tag.of(MetricTagName.NAME.name(), name);
-        return Metrics.counter(
-                // name
-                MetricName.GREETS_COUNT.getMetricName(),
-                // optional list of associated tags
-                List.of(tag)
-        );
+        // TODO: create a Tag with
+        //  - key: MetricTagName.NAME
+        //  - value: the person name
+        // var tag = ...
+        // TODO: create a Counter using the Metrics class, with
+        //  - name: MetricName.GREETS_COUNT
+        //  - tag: a list with the previous created tag
+        return null;
     }
 
     /*
@@ -85,9 +80,8 @@ public class MetricService {
                 .stream()
                 .filter(isGreeted -> !isGreeted)
                 .count();
-        // update gauge
-        assert greetsRemainingGauge != null;
-        greetsRemainingGauge.set(remainingToGreet);
+        // TODO: update the gauge value
+        // greetsRemainingGauge....
         log.info("Updated remaining greets to: {} people", remainingToGreet);
     }
 }
