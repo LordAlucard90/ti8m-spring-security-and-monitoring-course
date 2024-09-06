@@ -28,6 +28,7 @@ class MessageControllerSecurityIT {
 
     private static final RequestPostProcessor ALICE = httpBasic("alice", "password-a");
     private static final RequestPostProcessor BOB = httpBasic("bob", "password-b");
+    private static final RequestPostProcessor CHARLY = httpBasic("CHARLY", "password-c");
 
     @Nested
     class OpenEndpointTests {
@@ -38,6 +39,18 @@ class MessageControllerSecurityIT {
                             get("/messages/default/open")
                     )
                     .andExpect(status().isOk());
+        }
+
+        @Test
+        void givenUser_thenIsOk() throws Exception {
+            mockMvc
+                    .perform(
+                            get("/messages/default/open")
+                                    .with(BOB)
+
+                    )
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.message").value("open to everyone"));
         }
 
         @Test
@@ -77,6 +90,18 @@ class MessageControllerSecurityIT {
         }
 
         @Test
+        void givenUser_thenIsOk() throws Exception {
+            mockMvc
+                    .perform(
+                            get("/messages/default/authenticated")
+                                    .with(CHARLY)
+
+                    )
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.message").value("available to authenticated"));
+        }
+
+        @Test
         void givenStaff_thenIsOk() throws Exception {
             mockMvc
                     .perform(
@@ -113,6 +138,17 @@ class MessageControllerSecurityIT {
         }
 
         @Test
+        void givenUser_thenIsForbidden() throws Exception {
+            mockMvc
+                    .perform(
+                            get("/messages/default/staff")
+                                    .with(CHARLY)
+
+                    )
+                    .andExpect(status().isForbidden());
+        }
+
+        @Test
         void givenStaff_thenIsOk() throws Exception {
             mockMvc
                     .perform(
@@ -146,6 +182,17 @@ class MessageControllerSecurityIT {
                             get("/messages/default/admin")
                     )
                     .andExpect(status().isUnauthorized());
+        }
+
+        @Test
+        void givenUser_thenIsForbidden() throws Exception {
+            mockMvc
+                    .perform(
+                            get("/messages/default/admin")
+                                    .with(CHARLY)
+
+                    )
+                    .andExpect(status().isForbidden());
         }
 
         @Test

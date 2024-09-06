@@ -1,4 +1,4 @@
-package ch.ti8m.academy.security.basic2.solution.user;
+package ch.ti8m.academy.security.basic2.user;
 
 import ch.ti8m.academy.security.basic2.configuration.UserRole;
 import jakarta.persistence.*;

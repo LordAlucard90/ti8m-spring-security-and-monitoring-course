@@ -1,18 +1,26 @@
-package ch.ti8m.academy.security.basic1.solution.configuration;
+# Security Basic - 1 - Solution
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
+## Exercise
 
-import java.util.List;
+Create the following in memory users:
+- name: `alice`, password: `password-a`, roles: `ADMIN` and `STAFF`
+- name: `bob`, password: `password-b`, roles: `STAFF`
+- name: `charly`, password: `password-c`, roles: `USER`
 
+Hint: provide a bean for the password encoder.
+
+Security requirements:
+- Admin users (alice) can access `/default/admin`
+- Staff users (alice, bob) can access `/default/staff`
+- Authenticated users can access `/default/authenticated`
+- Anyone can access `/default/open`
+
+You know when the exercise is successfully completed when all the tests are green.
+
+## Solution
+
+Security filter configuration:
+```java
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -76,3 +84,4 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(users);
     }
 }
+```

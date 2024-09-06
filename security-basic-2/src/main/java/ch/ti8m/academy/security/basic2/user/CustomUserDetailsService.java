@@ -1,4 +1,4 @@
-package ch.ti8m.academy.security.basic2.solution.user;
+package ch.ti8m.academy.security.basic2.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
