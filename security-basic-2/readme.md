@@ -1,4 +1,4 @@
-# Security Basic - 2 - Solution
+# Security Basic - 2
 
 ## Exercise
 
