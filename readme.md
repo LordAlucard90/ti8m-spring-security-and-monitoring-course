@@ -7,6 +7,15 @@ Basic auth:
 - [Exercise 2](./security-basic-1)
 - [Exercise 3](./security-basic-2)
 
+CORS:
+- [Exercise 1a - Server](./cors/server)
+- [Exercise 1b - Client](./cors/client)
+
+OAuth2:
+- [Exercise 1 - AuthServer](./oauth2/authserver)
+- [Exercise 2 - Client](./oauth2/client)
+- [Exercise 3 - ResourceServer](./oauth2/resourceserver)
+
 Monitoring:
 - [Exercise 1](./monitoring-0)
 - [Exercise 2](./monitoring-1)
