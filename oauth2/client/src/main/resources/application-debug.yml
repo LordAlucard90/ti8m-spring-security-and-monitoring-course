@@ -1,0 +1,5 @@
+logging:
+  level:
+    org.springframework.web: DEBUG
+  pattern:
+    console: ${LOG_PATTERN:%clr(%5p) [%d] [%t] %logger{50} %mdc{} %m%n} #%clr: colored output the local stage

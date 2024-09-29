@@ -1,0 +1,26 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          AuthServerApp:
+            issuer-uri: http://localhost:8080
+        registration:
+          github:
+            clientId: REPLACE_ME
+            clientSecret: REPLACE_ME
+            clientName: Authorization through Github
+          google:
+            clientId: REPLACE_ME
+            clientSecret: REPLACE_ME
+            clientName: Authorization through Google
+          AuthServerApp:
+            clientId: client
+            clientSecret: secret
+            clientName: Custom Authorization Server (AuthServerApp)
+            provider: AuthServerApp
+            clientAuthenticationMethod: client_secret_basic
+            redirectUri: http://127.0.0.1:7070/login/oauth2/code/AuthServerApp
+            scope: [
+              openid
+            ]
