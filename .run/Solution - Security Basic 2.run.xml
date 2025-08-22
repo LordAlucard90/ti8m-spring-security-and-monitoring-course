@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Solution - Security Basic 2" type="JUnit" factoryName="JUnit">
+    <module name="security-basic-2-solution" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="ch.ti8m.academy.security.basic2.solution.message.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="ch.ti8m.academy.security.basic2.solution.message" />
+    <option name="MAIN_CLASS_NAME" value="ch.ti8m.academy.security.basic2.solution.message.MessageControllerSecurityIT" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
