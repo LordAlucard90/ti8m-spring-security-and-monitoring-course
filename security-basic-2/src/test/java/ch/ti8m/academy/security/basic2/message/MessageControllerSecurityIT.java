@@ -36,7 +36,7 @@ class MessageControllerSecurityIT {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
             var body = response.getBody();
             assertThat(body).isNotNull();
-            assertThat(body.getMessage()).isEqualTo("open to everyone");
+            assertThat(body.message()).isEqualTo("open to everyone");
         }
 
         @ParameterizedTest
@@ -59,7 +59,7 @@ class MessageControllerSecurityIT {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
             var body = response.getBody();
             assertThat(body).isNotNull();
-            assertThat(body.getMessage()).isEqualTo("open to everyone");
+            assertThat(body.message()).isEqualTo("open to everyone");
         }
     }
 
@@ -94,7 +94,7 @@ class MessageControllerSecurityIT {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
             var body = response.getBody();
             assertThat(body).isNotNull();
-            assertThat(body.getMessage()).isEqualTo("available to authenticated");
+            assertThat(body.message()).isEqualTo("available to authenticated");
         }
 
         @ParameterizedTest
@@ -146,7 +146,7 @@ class MessageControllerSecurityIT {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
             var body = response.getBody();
             assertThat(body).isNotNull();
-            assertThat(body.getMessage()).isEqualTo("available to user");
+            assertThat(body.message()).isEqualTo("available to user");
         }
 
         @ParameterizedTest
@@ -197,7 +197,7 @@ class MessageControllerSecurityIT {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
             var body = response.getBody();
             assertThat(body).isNotNull();
-            assertThat(body.getMessage()).isEqualTo("available to staff");
+            assertThat(body.message()).isEqualTo("available to staff");
         }
 
         @ParameterizedTest
@@ -264,7 +264,7 @@ class MessageControllerSecurityIT {
             assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
             var body = response.getBody();
             assertThat(body).isNotNull();
-            assertThat(body.getMessage()).isEqualTo("available to admin");
+            assertThat(body.message()).isEqualTo("available to admin");
         }
 
         @ParameterizedTest
