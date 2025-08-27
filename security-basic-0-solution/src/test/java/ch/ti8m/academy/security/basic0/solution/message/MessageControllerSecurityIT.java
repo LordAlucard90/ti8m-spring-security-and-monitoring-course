@@ -38,7 +38,8 @@ class MessageControllerSecurityIT {
                     .perform(
                             get("/messages/default/open")
                     )
-                    .andExpect(status().isOk());
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.message").value("open to everyone"));
         }
 
         @Test
