@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +44,8 @@ public class SecurityConfig {
 
         // configure authentication type
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
-        http.csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2/**")));
+        final var h2PathMatcher = PathPatternRequestMatcher.withDefaults().matcher("/h2/**");
+        http.csrf(csrf -> csrf.ignoringRequestMatchers(h2PathMatcher));
 
         return http.build();
     }
