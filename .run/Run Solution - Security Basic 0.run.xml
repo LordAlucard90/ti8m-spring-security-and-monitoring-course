@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Seolution - Security Basic 0" type="Application" factoryName="Application">
+  <configuration default="false" name="Run Solution - Security Basic 0" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ch.ti8m.academy.security.basic0.solution.SecurityBasic" />
     <module name="security-basic-0-solution" />
     <extension name="coverage">
