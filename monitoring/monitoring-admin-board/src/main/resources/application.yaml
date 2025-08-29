@@ -1,0 +1,13 @@
+server:
+  port: 8300
+  servlet:
+    context-path: /monitoring-admin
+
+spring:
+  application:
+    name: monitoring-admin
+
+  security:
+    user:
+      name: monitoring
+      password: secret
