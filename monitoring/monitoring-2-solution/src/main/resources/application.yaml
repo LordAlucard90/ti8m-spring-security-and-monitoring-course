@@ -1,0 +1,47 @@
+server:
+  port: 8303
+  servlet:
+    context-path: /monitoring
+
+spring:
+  application:
+    # displayed name in the admin dashboard
+    name: monitoring-2
+
+  security:
+    user:
+      name: student
+      password: secret
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:8300/monitoring-admin
+        username: monitoring
+        password: secret
+        # configuration for client (data sent to the server to connect to client)
+        instance:
+          metadata:
+            user:
+              name: ${spring.security.user.name}
+              password: ${spring.security.user.password}
+        # configuration for server
+        routes:
+          endpoints: ${management.endpoints.web.exposure.include}
+
+management:
+  endpoint:
+    health:
+      # used by spring boot admin
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health      # http://localhost:8303/monitoring/actuator/health
+          - info        # http://localhost:8303/monitoring/actuator/info
+          - metrics     # http://localhost:8303/monitoring/actuator/metrics
+          - prometheus  # http://localhost:8303/monitoring/actuator/prometheus
+          - env         # http://localhost:8303/monitoring/actuator/env
+          - beans       # http://localhost:8303/monitoring/actuator/beans
+          - mappings    # http://localhost:8303/monitoring/actuator/mappings

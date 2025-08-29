@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>ch.ti8m.academy</groupId>
-        <artifactId>spring-security-and-monitoring</artifactId>
+        <artifactId>monitoring</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
