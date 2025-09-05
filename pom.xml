@@ -24,6 +24,7 @@
         <module>cors</module>
         <module>oauth2</module>
         <module>monitoring</module>
+        <module>apikey</module>
     </modules>
 
     <properties>
