@@ -9,8 +9,12 @@ public record WhoAmIDto(
         UserRole role
 ) {
     public static WhoAmIDto fromSecurityContext() {
-        var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserEntity user) {
+        // the current security context can be retrieved by the security context holder
+        var securityContext = SecurityContextHolder.getContext();
+        // the authentication is available from the current security context
+        var authentication = securityContext.getAuthentication();
+        // the principal is accessible from the Authentication
+        if (authentication.getPrincipal() instanceof UserEntity user) {
             return new WhoAmIDto(
                     user.getUsername(),
                     user.getRole()

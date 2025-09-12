@@ -5,17 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ch.ti8m.academy</groupId>
-        <artifactId>spring-security-and-monitoring</artifactId>
+        <artifactId>apikey</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>apikey</artifactId>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>apikey-0</module>
-        <module>apikey-0-solution</module>
-    </modules>
+    <artifactId>apikey-0</artifactId>
 
 </project>

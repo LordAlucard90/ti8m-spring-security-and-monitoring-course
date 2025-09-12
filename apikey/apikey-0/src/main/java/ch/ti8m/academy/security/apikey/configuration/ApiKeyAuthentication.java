@@ -1,6 +1,6 @@
-package ch.ti8m.academy.security.apikey.solution.configuration;
+package ch.ti8m.academy.security.apikey.configuration;
 
-import ch.ti8m.academy.security.apikey.solution.user.UserEntity;
+import ch.ti8m.academy.security.apikey.user.UserEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,10 +8,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApiKeyAuthentication implements Authentication {
+    // the principal in this example is represented by the whole entity for convenience,
+    // it should be a dto with the needed information only
     private UserEntity principal;
     private boolean authenticated;
 
@@ -31,20 +34,20 @@ public class ApiKeyAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        // the name in our case is the username
-        return this.principal.getUsername();
+        // TODO: return the name from the principal (username)
+        return null;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // the authorities are provided by the entity for convenience
-        return this.principal.getAuthorities();
+        // TODO: return the authorities from the principal
+        return List.of();
     }
 
     @Override
     public Object getCredentials() {
-        // the credentials should always be null after the authentication phase
-        return null;
+        // TODO: do not return the credentials, return null instead)
+        return this.principal.getApiKey();
     }
 
     @Override

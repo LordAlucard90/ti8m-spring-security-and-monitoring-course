@@ -1,6 +1,6 @@
-package ch.ti8m.academy.security.apikey.solution.message;
+package ch.ti8m.academy.security.apikey.message;
 
-import ch.ti8m.academy.security.apikey.solution.configuration.UserRole;
+import ch.ti8m.academy.security.apikey.configuration.UserRole;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class MessageControllerTest {
+class MessageControllerSecurityIT {
     private static final String CSV_HEADER = "apiKey;username;role";
     private static final String CSV_ANONYMOUS = ";Anonymous;";
     private static final String CSV_ALICE = "api-key-a;alice@example.com;ADMIN";
