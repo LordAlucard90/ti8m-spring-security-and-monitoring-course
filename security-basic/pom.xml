@@ -9,6 +9,16 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>security-basic-2</artifactId>
+    <artifactId>security-basic</artifactId>
 
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>security-basic-0</module>
+        <module>security-basic-0-solution</module>
+        <module>security-basic-1</module>
+        <module>security-basic-1-solution</module>
+        <module>security-basic-2</module>
+        <module>security-basic-2-solution</module>
+    </modules>
 </project>

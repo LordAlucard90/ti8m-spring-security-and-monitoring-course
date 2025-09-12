@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ch.ti8m.academy</groupId>
-        <artifactId>spring-security-and-monitoring</artifactId>
+        <artifactId>security-basic</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>security-basic-1</artifactId>
+    <artifactId>security-basic-2-solution</artifactId>
 
 </project>
