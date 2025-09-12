@@ -1,0 +1,23 @@
+server:
+  port: 8301
+  servlet:
+    context-path: /monitoring
+
+spring:
+  security:
+    user:
+      name: student
+      password: secret
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health      # http://localhost:8301/monitoring/actuator/health
+          - info        # http://localhost:8301/monitoring/actuator/info
+          - metrics     # http://localhost:8301/monitoring/actuator/metrics
+          - prometheus  # http://localhost:8301/monitoring/actuator/prometheus
+          - env         # http://localhost:8301/monitoring/actuator/env
+          - beans       # http://localhost:8301/monitoring/actuator/beans
+          - mappings    # http://localhost:8301/monitoring/actuator/mappings

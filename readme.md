@@ -4,8 +4,8 @@
 
 Basic auth:
 - [Exercise 1](./security-basic-0)
-- [Exercise 2](./security-basic-1)
-- [Exercise 3](./security-basic-2)
+- [Exercise 2](security-basic/security-basic-1)
+- [Exercise 3](security-basic/security-basic-2)
 
 CORS:
 - [Exercise 1a - Server](./cors/server)
@@ -26,8 +26,8 @@ Monitoring:
 
 Basic auth:
 - [Solution Exercise 1](./security-basic-0-solution)
-- [Solution Exercise 2](./security-basic-1-solution)
-- [Solution Exercise 3](./security-basic-2-solution)
+- [Solution Exercise 2](security-basic/security-basic-1-solution)
+- [Solution Exercise 3](security-basic/security-basic-2-solution)
 
 Monitoring:
 - [Solutin Exercise 1](./monitoring-0-solution)

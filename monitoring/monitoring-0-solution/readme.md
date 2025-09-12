@@ -1,0 +1,67 @@
+# Monitoring - 0 - Solution
+
+## Part 1
+
+Explore the following actuator resources:
+- http://localhost:8301/monitoring/actuator/health
+- http://localhost:8301/monitoring/actuator/info
+- http://localhost:8301/monitoring/actuator/metrics
+- http://localhost:8301/monitoring/actuator/prometheus
+- http://localhost:8301/monitoring/actuator/env
+- http://localhost:8301/monitoring/actuator/beans
+- http://localhost:8301/monitoring/actuator/mappings
+
+Note: the metrics listed in the `metrics` endpoint 
+can be found in the prometheus after substituting `.` with `_`.
+
+Tip: use your acquired knowledge on security configuration 
+to access the protected pages
+
+### Solution
+
+The credentials are:
+```yaml
+spring:
+  security:
+    user:
+      name: student
+      password: secret
+```
+
+## Part 2
+
+Call the custom endpoint with multiple names
+- http://localhost:8301/monitoring/messages/greet?name=alice
+- http://localhost:8301/monitoring/messages/greet?name=bob
+- http://localhost:8301/monitoring/messages/greet?name=charly
+
+Search in the [prometheus endpoint](http://localhost:8301/monitoring/actuator/prometheus)
+the uri `/messages/greet` and see how the following metrics change after each request:
+- `http_server_requests_seconds_count`
+- `http_server_requests_seconds_sum`
+- `http_server_requests_seconds_max`
+
+What do they represent?
+
+## Requests
+
+On Windows, Powershell is not completely compatible,
+I have Git Bash installed and I was able to use that:
+1. Go to `File` > `Settings` > `Tools` > `Terminal`
+2. Set Shell path: `C:\Program Files\Git\bin\bash.exe`
+
+```bash
+curl 'http://localhost:8301/monitoring/messages/greet?name=alice' -w " %{http_code}" 
+```
+```bash
+curl 'http://localhost:8301/monitoring/messages/greet?name=bob' -w " %{http_code}" 
+```
+```bash
+curl 'http://localhost:8301/monitoring/messages/greet?name=charly' -w " %{http_code}" 
+```
+
+### Solution
+
+- `http_server_requests_seconds_count` holds the number of requests
+- `http_server_requests_seconds_sum` holds the sum of all the request execution times
+- `http_server_requests_seconds_max` holds the max execution time
