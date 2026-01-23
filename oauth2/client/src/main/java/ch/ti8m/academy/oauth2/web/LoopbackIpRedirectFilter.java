@@ -4,14 +4,15 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.io.IOException;
+//import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * This filter ensures that the loopback IP <code>127.0.0.1</code> is used to access the application so that the sample works correctly,
@@ -32,7 +33,10 @@ public class LoopbackIpRedirectFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (LOCALHOST.equals(request.getServerName())) {
-            UriComponents uri = UriComponentsBuilder.fromHttpRequest(new ServletServerHttpRequest(request))
+            // fixme: remove
+//            UriComponents uri = UriComponentsBuilder.fromHttpRequest(new ServletServerHttpRequest(request))
+            // fixme: test
+            UriComponents uri = UriComponentsBuilder.fromUriString(request.getRequestURI())
                 .host(HOST)
                 .build();
             response.sendRedirect(uri.toUriString());
