@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Security Basic 0" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="ch.ti8m.academy.security.basic0.SecurityBasic" />
+  <configuration default="false" name="Run Security Basic 0" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
     <module name="security-basic-0" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.ti8m.academy.security.basic0.SecurityBasic" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="ch.ti8m.academy.security.basic0.*" />

@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Solution - Monitoring 1" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="ch.ti8m.academy.monitoring1.solution.Monitoring" />
+  <configuration default="false" name="Run Solution - Monitoring 1" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
     <module name="monitoring-1-solution" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.ti8m.academy.monitoring1.solution.Monitoring" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="ch.ti8m.academy.monitoring1.solution.*" />

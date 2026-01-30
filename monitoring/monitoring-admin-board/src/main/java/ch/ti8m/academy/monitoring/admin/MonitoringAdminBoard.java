@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableAdminServer
 @SpringBootApplication
 public class MonitoringAdminBoard {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(MonitoringAdminBoard.class, args);
     }
 }

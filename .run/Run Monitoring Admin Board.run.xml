@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Start Security Basic 0" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <configuration default="false" name="Run Monitoring Admin Board" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
-    <module name="security-basic-0" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.ti8m.academy.security.basic0.SecurityBasic" />
+    <module name="monitoring-admin-board" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.ti8m.academy.monitoring.admin.MonitoringAdminBoard" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="ch.ti8m.academy.security.basic0.*" />
+        <option name="PATTERN" value="ch.ti8m.academy.monitoring.admin.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

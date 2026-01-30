@@ -24,8 +24,9 @@ and each time a person is greeted the gouge must be updated.
 Register the metric in the Spring Boot Admin dashboard.
 
 ### Links
+- [Admin dashboard](http://localhost:8300/monitoring-admin/wallboard)
+
 - [promethus](http://localhost:8303/monitoring/actuator/prometheus)
-- [Admin dashboard](http://localhost:8303/monitoring/wallboard)
 - [Greet alice](http://localhost:8303/monitoring/messages/greet?name=alice)
 - [Greet bob](http://localhost:8303/monitoring/messages/greet?name=bob)
 - [Greet charly](http://localhost:8303/monitoring/messages/greet?name=charly)

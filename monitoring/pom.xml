@@ -14,19 +14,24 @@
 
     <packaging>pom</packaging>
 
+    <properties>
+        <!-- TODO: release with actual release as soon as possible -->
+        <spring-boot-admin.version>4.0.0-M1</spring-boot-admin.version>
+    </properties>
+
     <dependencies>
-<!--        TODO; dependency management-->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>3.5.2</version>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>3.5.2</version>
+            <version>${spring-boot-admin.version}</version>
         </dependency>
     </dependencies>
+
     <modules>
         <module>monitoring-0</module>
         <module>monitoring-0-solution</module>
