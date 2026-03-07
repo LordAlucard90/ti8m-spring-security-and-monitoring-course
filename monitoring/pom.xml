@@ -15,8 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <!-- TODO: release with actual release as soon as possible -->
-        <spring-boot-admin.version>4.0.0-M1</spring-boot-admin.version>
+        <spring-boot-admin.version>4.0.1</spring-boot-admin.version>
     </properties>
 
     <dependencies>
