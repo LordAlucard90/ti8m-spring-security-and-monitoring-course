@@ -33,9 +33,6 @@ public class LoopbackIpRedirectFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (LOCALHOST.equals(request.getServerName())) {
-            // fixme: remove
-//            UriComponents uri = UriComponentsBuilder.fromHttpRequest(new ServletServerHttpRequest(request))
-            // fixme: test
             UriComponents uri = UriComponentsBuilder.fromUriString(request.getRequestURI())
                 .host(HOST)
                 .build();
