@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Log4j2
 public class ClientApp {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(ClientApp.class, args);
         log.info("Startup sequence completed.");
     }

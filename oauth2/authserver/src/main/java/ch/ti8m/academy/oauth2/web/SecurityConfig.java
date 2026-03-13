@@ -48,16 +48,14 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain asFilterChain(HttpSecurity http) throws Exception {
 
+        http.securityMatcher("/**");
+        http.oauth2AuthorizationServer(Customizer.withDefaults());
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
         http.exceptionHandling(e ->
             e.authenticationEntryPoint(
                 new LoginUrlAuthenticationEntryPoint("/login"))
         );
 
-        // fixme: remove
-//        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        // fixme: test
-        http.oauth2AuthorizationServer(Customizer.withDefaults());
         return http.build();
     }
 
@@ -74,6 +72,7 @@ public class SecurityConfig {
     }
 
     @Bean
+//    @Primary
     public RegisteredClientRepository registeredClientRepositoryWithClientCredentials() {
         var internalId = UUID.randomUUID().toString();
         var registeredClient = RegisteredClient.withId(internalId)
@@ -88,6 +87,7 @@ public class SecurityConfig {
     }
 
     @Bean
+//    @Primary
     public RegisteredClientRepository registeredClientRepositoryWithAuthorizationCode() {
         var internalId = UUID.randomUUID().toString();
         var registeredClient = RegisteredClient.withId(internalId)
@@ -106,6 +106,7 @@ public class SecurityConfig {
     }
 
     @Bean
+//    @Primary
     public RegisteredClientRepository registeredClientRepositoryWithAuthorizationCodeAndPkce() {
         var internalId = UUID.randomUUID().toString();
         var registeredClient = RegisteredClient.withId(internalId)
@@ -121,6 +122,7 @@ public class SecurityConfig {
     }
 
     @Bean
+//    @Primary
     public RegisteredClientRepository registeredClientRepositoryWithAuthorizationCodeAndPkce_ClientApp() {
         var internalId = UUID.randomUUID().toString();
         var registeredClient = RegisteredClient.withId(internalId)
