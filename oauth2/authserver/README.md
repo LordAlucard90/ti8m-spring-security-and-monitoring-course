@@ -21,6 +21,10 @@ Use the <i>@Primary</i> annotation to select the one you want to explore (for th
    ```shell
    curl -X 'POST' 'http://localhost:8080/oauth2/token?grant_type=client_credentials&scope=CUSTOM' --header 'REPLACE_ME'
    ```
+   windows:
+   ```shell 
+   curl.exe -X POST http://localhost:8080/oauth2/token ` -u client:secret ` -H "Content-Type: application/x-www-form-urlencoded" ` -d "grant_type=client_credentials&scope=CUSTOM"
+   ```
 4. Use https://jwt.io to decode and inspect the returned access token
    - Where does the priority field come from?
    - Where does the scope field come from?

@@ -1,17 +1,22 @@
 package ch.ti8m.academy.security.basic2.solution.message;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverters;
+import org.springframework.test.web.servlet.client.RestTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@AutoConfigureRestTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MessageControllerSecurityIT {
     private static final String CSV_HEADER = "username;password";
@@ -20,9 +25,23 @@ class MessageControllerSecurityIT {
     private static final String CSV_CHARLY = "charly@example.com;password-c";
     private static final String CSV_DANIEL = "daniel@example.com;password-d";
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+    @LocalServerPort
+    private int port;
 
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+
+    @Autowired
+    private RestTestClient testClient;
+
+    @BeforeEach
+    void setUp() {
+        testClient = RestTestClient
+                .bindToServer()
+                .baseUrl("http://localhost:%d/%s".formatted(port, contextPath))
+                .configureMessageConverters(HttpMessageConverters.Builder::registerDefaults)
+                .build();
+    }
 
     @Nested
     class OpenEndpointTests {
@@ -30,11 +49,14 @@ class MessageControllerSecurityIT {
 
         @Test
         void givenNoUser_thenIsOk() throws Exception {
-            var response = restTemplate
-                    .getForEntity(basePath, MessageDto.class);
+            var body = testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isOk()
+                    .returnResult(MessageDto.class).getResponseBody();
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            var body = response.getBody();
             assertThat(body).isNotNull();
             assertThat(body.message()).isEqualTo("open to everyone");
         }
@@ -52,12 +74,15 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenAuthorizedUser_thenIsOk(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
+            var body = testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isOk()
+                    .returnResult(MessageDto.class).getResponseBody();
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            var body = response.getBody();
             assertThat(body).isNotNull();
             assertThat(body.message()).isEqualTo("open to everyone");
         }
@@ -69,10 +94,12 @@ class MessageControllerSecurityIT {
 
         @Test
         void givenNoUser_thenIsUnauthorized() {
-            var response = restTemplate
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isUnauthorized();
         }
 
         @ParameterizedTest
@@ -87,12 +114,15 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenAuthorizedUser_thenIsOk(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
+            var body = testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isOk()
+                    .returnResult(MessageDto.class).getResponseBody();
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            var body = response.getBody();
             assertThat(body).isNotNull();
             assertThat(body.message()).isEqualTo("available to authenticated");
         }
@@ -107,11 +137,13 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenNotAuthorizedUser_thenIsUnauthorized(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isUnauthorized();
         }
     }
 
@@ -121,10 +153,12 @@ class MessageControllerSecurityIT {
 
         @Test
         void givenNoUser_thenIsUnauthorized() {
-            var response = restTemplate
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isUnauthorized();
         }
 
         @ParameterizedTest
@@ -139,12 +173,15 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenAuthorizedUser_thenIsOk(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
+            var body = testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isOk()
+                    .returnResult(MessageDto.class).getResponseBody();
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            var body = response.getBody();
             assertThat(body).isNotNull();
             assertThat(body.message()).isEqualTo("available to user");
         }
@@ -159,11 +196,13 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenNotAuthorizedUser_thenIsUnauthorized(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isUnauthorized();
         }
     }
 
@@ -173,10 +212,12 @@ class MessageControllerSecurityIT {
 
         @Test
         void givenNoUser_thenIsUnauthorized() {
-            var response = restTemplate
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isUnauthorized();
         }
 
         @ParameterizedTest
@@ -190,12 +231,15 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenAuthorizedUser_thenIsOk(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
+            var body = testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isOk()
+                    .returnResult(MessageDto.class).getResponseBody();
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            var body = response.getBody();
             assertThat(body).isNotNull();
             assertThat(body.message()).isEqualTo("available to staff");
         }
@@ -210,11 +254,13 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenUserWithoutRights_thenIsForbidden(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, Object.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isForbidden();
         }
 
         @ParameterizedTest
@@ -227,11 +273,14 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenNotAuthorizedUser_thenIsUnauthorized(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isUnauthorized()
+                    .returnResult(MessageDto.class).getResponseBody();
         }
     }
 
@@ -241,10 +290,12 @@ class MessageControllerSecurityIT {
 
         @Test
         void givenNoUser_thenIsUnauthorized() {
-            var response = restTemplate
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .exchange()
+                    .expectStatus().isUnauthorized();
         }
 
         @ParameterizedTest
@@ -257,12 +308,15 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenAuthorizedUser_thenIsOk(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
+            var body = testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isOk()
+                    .returnResult(MessageDto.class).getResponseBody();
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-            var body = response.getBody();
             assertThat(body).isNotNull();
             assertThat(body.message()).isEqualTo("available to admin");
         }
@@ -278,11 +332,13 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenUserWithoutRights_thenIsForbidden(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, Object.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isForbidden();
         }
 
         @ParameterizedTest
@@ -295,11 +351,14 @@ class MessageControllerSecurityIT {
                 }
         )
         void givenNotAuthorizedUser_thenIsUnauthorized(final String username, final String password) {
-            var response = restTemplate
-                    .withBasicAuth(username, password)
-                    .getForEntity(basePath, MessageDto.class);
-
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+            testClient
+                    .get()
+                    .uri(basePath)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .headers(httpHeaders -> httpHeaders.setBasicAuth(username, password))
+                    .exchange()
+                    .expectStatus().isUnauthorized()
+                    .returnResult(MessageDto.class).getResponseBody();
         }
     }
 }

@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="ApiKey 0" type="JUnit" factoryName="JUnit">
+  <configuration default="false" name="Test ApiKey 0" type="JUnit" factoryName="JUnit">
     <module name="apikey-0" />
     <extension name="coverage">
       <pattern>

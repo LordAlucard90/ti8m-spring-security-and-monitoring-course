@@ -1,17 +1,18 @@
 package ch.ti8m.academy.oauth2.generate;
 
-import static lombok.AccessLevel.PRIVATE;
-
-import java.util.Base64;
+import ch.ti8m.academy.oauth2.web.SecurityConfig;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import ch.ti8m.academy.oauth2.web.SecurityConfig;
+
+import java.util.Base64;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Log4j2
 @NoArgsConstructor(access = PRIVATE)
 public final class BasicAuthUsernamePasswordGenerator {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         String username = SecurityConfig.CLIENT_ID;
         String password = SecurityConfig.CLIENT_SECRET;
 

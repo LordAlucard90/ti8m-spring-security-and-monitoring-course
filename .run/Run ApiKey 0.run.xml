@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run ApiKey 0" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="ch.ti8m.academy.security.apikey.ApiKeyToken" />
+  <configuration default="false" name="Run ApiKey 0" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
     <module name="apikey-0" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="ch.ti8m.academy.security.apikey.ApiKeyToken" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="ch.ti8m.academy.security.apikey.*" />

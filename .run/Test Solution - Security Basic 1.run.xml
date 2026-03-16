@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Solution - Security Basic 1" type="JUnit" factoryName="JUnit">
+  <configuration default="false" name="Test Solution - Security Basic 1" type="JUnit" factoryName="JUnit">
     <module name="security-basic-1-solution" />
     <extension name="coverage">
       <pattern>

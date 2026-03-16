@@ -14,6 +14,23 @@
 
     <packaging>pom</packaging>
 
+    <properties>
+        <spring-boot-admin.version>4.0.1</spring-boot-admin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
+    </dependencies>
+
     <modules>
         <module>monitoring-0</module>
         <module>monitoring-0-solution</module>
