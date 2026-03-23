@@ -2,7 +2,7 @@
 
 ## Run spring boot application
 
-- Start the Cors Server by running `CorsApp.java`
+- Start the Cors Server by running `ServerApp.java`
 - Alternatively, issue the command `mvn clean spring-boot:run` in this directory
 
 ## Tasks

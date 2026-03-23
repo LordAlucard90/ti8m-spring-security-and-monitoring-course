@@ -4,9 +4,11 @@
 
 - Start the Cors Client by running `ClientApp.java`
 - Alternatively, issue the command `mvn clean spring-boot:run` in this directory
+- Check the log output for the generated password
 
 ## Tasks
 1. Have a look at the provided files
 2. Navigate to [http://localhost:9090/index.html](http://localhost:9090/index.html)
-3. Use network tab of the browsers dev tools to inspect what's going on
-4. Stop the server and fix the problem
+3. Login using the password from the log output and the username "user"
+4. Use network tab of the browsers dev tools to inspect what's going on
+5. Stop the server and fix the problem
